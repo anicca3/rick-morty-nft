@@ -138,6 +138,17 @@ const App = () => {
     }
   }
 
+  const checkNetwork = async () => {
+    try { 
+      console.log(window.ethereum.networkVersion)
+      if (window.ethereum.networkVersion !== '4') {
+        alert("Please connect to Rinkeby!")
+      }
+    } catch(error) {
+      console.log(error)
+    }
+  };
+
   // Render Methods
   const renderNotConnectedContainer = () => (
     <button className="cta-button connect-wallet-button" onClick={connectWallet}>
@@ -164,6 +175,7 @@ const App = () => {
   }
 
   useEffect(() => {
+    checkNetwork();
     updateTotalNFTsMintedSoFar();
     checkIfWalletIsConnected();
   }, [])
